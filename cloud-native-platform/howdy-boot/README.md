@@ -6,7 +6,7 @@ mvnw clean package
 cf push
 ```
 
-## Howdy Spring Boot
+## howdy-boot end-point(s)
 
 Simple demo app that has end-points to generate random names
 
