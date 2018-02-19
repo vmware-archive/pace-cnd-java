@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: howdy-api
+zuul:
+  routes:
+    howdy-boot:
+      path: /springboot/**
+      url: ${apps.springboot.url}
+    howdy-kotlin:
+      path: /kotlin/**
+      url: ${apps.kotlin.url}
+    howdy-nodejs:
+      path: /nodejs/**
+      url: ${apps.nodejs.url}
+    howdy-python:
+      path: /python/**
+      url: ${apps.python.url}
+    howdy-akka:
+      path: /akka/**
+      url: ${apps.akka.url}

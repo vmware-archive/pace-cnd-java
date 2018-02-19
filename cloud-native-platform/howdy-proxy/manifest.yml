@@ -1,0 +1,11 @@
+applications:
+- name: howdy-api
+  random-route: true
+  memory: 1G
+  path: target/api-zuulproxy-0.0.1-SNAPSHOT.jar
+  env:
+    APPS_SPRINGBOOT_URL: <howdy-boot-endpoint-here>
+    APPS_KOTLIN_URL: <howdy-kotlin-endpoint-here>
+    APPS_NODEJS_URL: <howdy-nodejs-endpoint-here>
+    APPS_PYTHON_URL: <howdy-python-endpoint-here>
+    APPS_AKKA_URL: <howdy-akka-endpoint-here>

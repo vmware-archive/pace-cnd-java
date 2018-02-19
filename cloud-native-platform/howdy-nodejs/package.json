@@ -1,0 +1,15 @@
+{
+  "name": "howdy-nodejs",
+  "version": "1.0.0",
+  "description": "howdy nodejs for cloud foundry",
+  "scripts" : { "start" : "node howdy.js"  },  
+  "author": "corbs",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "cfenv" : "^1.0.4",
+    "express": "^4.16.0"
+  },
+  "engines": {
+    "node" : "^4.8.7"
+  }  
+}
