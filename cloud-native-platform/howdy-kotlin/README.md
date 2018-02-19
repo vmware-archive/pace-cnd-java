@@ -1,6 +1,14 @@
-## Howdy Kotlin Spring Boot
+## Build and Push howdy-kotlin
 
-A simple Kotlin Spring Boot example that has a Random Address generator
+```
+cd howdy-kotlin
+mvnw clean package
+cf push
+```
+
+## howdy-kotlin end-point(s)
+
+A simple Kotlin Spring Boot demo that generates random addresses
 
 Random Full Address:
 ``/address``
@@ -16,5 +24,3 @@ Random State:
 
 Random Zipcode:  
 ``/address/zipcode``
-
-Howdy Boot, Howdy Kotlin, Howdy Nodejs and Howdy Python are all simple microservices that each expose a different random API implemented in a different language.  For example, Howdy Boot exposes a random name API, Howdy Kotlin exposes a random address API, Howdy Nodejs exposes enpoints to encrypt and decrypt text and Howdy Python exposes a random number API.  All examples that show the power of PCF to run microservices in a language-agnostic manner ( awe yeah).  
