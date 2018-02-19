@@ -15,14 +15,14 @@ An example Node.js app on Cloud Foundry.  Uses the [cfenv](https://github.com/cl
 
 ### Clone and Push
 
-1. ``git clone https://github.com/corbtastik/howdy-nodejs.git``
-2. ``cd howdy-nodejs.git``
-3. ``npm install``
-4. ``cf push``
+1. ``cd howdy-nodejs``
+2. ``npm install``
+3. ``cf push``
+4. Record end-point
 
 ### Call end-points
 
-1. ``http howdy-nodejs.cfapps.io/howdy``
+1. ``http <your-end-point>/howdy``
 
 Returns information about the [Application Environment](https://docs.run.pivotal.io/devguide/deploy-apps/environment-variable.html#VCAP-APPLICATION) hydrated by Cloud Foundry.
 
@@ -67,7 +67,7 @@ Returns information about the [Application Environment](https://docs.run.pivotal
 }
 ```
 
-2. ``http POST howdy-nodejs.cfapps.io/echo movie="Nacho Libre" director="Jared Hess" starring="Jack Black" year:=2006``
+2. ``http POST <your-end-point>/echo movie="Nacho Libre" director="Jared Hess" starring="Jack Black" year:=2006``
 
 Echos the request body as the response.  For example...
 
