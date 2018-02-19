@@ -1,0 +1,12 @@
+applications:
+- name: client
+  path: target/client-0.0.1-SNAPSHOT.jar
+  disk_quota: 1G
+  instances: 1
+  memory: 1G
+  buildpack: java_buildpack
+  random-route: true
+  stack: cflinuxfs2
+  services:
+  - service-registry
+  - circuit-breaker-dashboard

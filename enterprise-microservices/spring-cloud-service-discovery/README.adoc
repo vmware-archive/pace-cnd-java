@@ -1,0 +1,211 @@
+= PACE Enterprise Microservices with Spring Cloud Workshop
+
+The purpose of this workshop is demonstrate how Spring Cloud can help developers create robust cloud native microservice applications.
+
+== Spring Cloud Service Discovery (Eureka)
+
+=== Create and Register the Service
+
+. Check out the https://github.com/Pivotal-Field-Engineering/pace-cloud-native-workshop/tree/spring-cloud-service-discovery[sample project].
+
+. Note the following dependency that's been added to the `pom.xml` file.
+
++
+.pom.xml
+[source,xml]
+----
+.
+.
+.
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>io.pivotal.spring.cloud</groupId>
+				<artifactId>spring-cloud-services-dependencies</artifactId>
+				<version>1.6.0.RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>Edgware.RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+<dependencies>
+    .
+    .
+    .
+		<dependency>
+			<groupId>io.pivotal.spring.cloud</groupId>
+			<artifactId>spring-cloud-services-starter-service-registry</artifactId>
+		</dependency>
+</dependencies>
+----
+
+. Examine the `SBController.java` source, and note the `EnableDiscoveryClient` annotation that's been added to the class.  This annotation will allow the application to register service endpoints with the Eureka service registry.
+
++
+In addition, there is a `/language` RequestMapping endpoint, which the client will invoke to return the language.
+
++
+.SBController.java
+[source,java]
+----
+package io.pivotal.pace;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@EnableDiscoveryClient
+public class SBController {
+
+	private GreetingRepository greetingRepository;
+
+    @Value("${greetingLanguage}")
+	private String language;
+
+	public SBController(GreetingRepository greetingRepository) {
+		this.greetingRepository = greetingRepository;
+	}
+
+	@RequestMapping("/")
+	public String greetingLanguage() {
+		return "Greeting language is " + language;
+	}
+
+	@RequestMapping("/greeting")
+	public String greeting() {
+		List<Greeting> greeting = greetingRepository.findByLanguage(language);
+		if (greeting.isEmpty())
+			return "Greeting not found for " + language;
+		else
+			return greeting.get(0).getText();
+	}
+
+	@RequestMapping("/language")
+	public String language() {
+		return language;
+	}
+
+}
+----
+
+. Build the application jar file.
++
+[source,bash]
+----
+mvn clean package -DskipTests
+----
+
+. Create a Spring Cloud Services Service Registry instance in PWS.
+
++
+[source,bash]
+----
+cf create-service p-service-registry standard service-registry
+----
+
++
+You can observe the instance being created from the Apps Manager in PWS.
+
++
+image:img/service-instance-creation.png[]
+
++
+Wait for the service to be created.
+
+. Edit the `manifest.yml` file, and change the hostname of the route to be unique.
+
+. Push the application to PWS.
+
+. From the Apps Manager console, navigate to the service instance and click the `Manage` link on the top right corner.  You should see that your application is registered.
+
++
+image:img/service-registry-status.png[]
+
+=== Create the Client
+
+Now lets create a client application that will look up the service from the service registry, and invoke it.
+
+. Take a moment to review the `ClientController.java` source.  Note that the root endpoint `/` will invoke the `/language` endpoint of the `sb-basic-demo` app registered with the Eureka Discovery Server.
+
++
+.ClientController.java
+[source,java]
+----
+package io.pivotal.pace;
+
+import java.net.URI;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
+
+@RestController
+@EnableDiscoveryClient
+public class ClientController {
+
+    @Bean
+    @LoadBalanced
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @RequestMapping("/")
+	public String phrase() {
+
+		URI uri = UriComponentsBuilder.fromUriString("//sb-basic-demo/language")
+	            .build()
+	            .toUri();
+
+		String language = restTemplate.getForObject(uri, String.class);
+		return "Greeting language is " + language;
+	}
+
+}
+----
+
+. In a terminal window, switch to the `client` directory and build the client application.
+
++
+[source,bash]
+----
+mvn clean package -DskipTests
+----
+
+. Push the client application to PWS.
+
++
+[source,bash]
+----
+cf push
+----
+
+. Note that the client has now also registered with the config server, as the binding is specified in the `manifest.yml`.
+
++
+image:img/service-registry-client-registered.png[]
+
+
+. From the browser, hit the client endpoint URL.
+
++
+image:img/client.png[]
