@@ -15,3 +15,13 @@ Add the end-point(s) into manifest.yml
 ``cf push``
 
 Record the proxy-end-point because we'll use it below to test api calls
+
+## Test api(s)
+
+```
+http <proxy-end-point>/akka/users
+http <proxy-end-point>/springboot/names
+http <proxy-end-point>/nodejs/howdy
+http <proxy-end-point>/kotlin/address
+http <proxy-end-point>/python/int
+```
