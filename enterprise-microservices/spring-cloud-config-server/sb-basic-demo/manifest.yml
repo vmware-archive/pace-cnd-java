@@ -1,0 +1,10 @@
+applications:
+- name: sb-basic-demo
+  path: target/sb-basic-demo-0.0.1-SNAPSHOT.jar
+  disk_quota: 1G
+  instances: 1
+  memory: 1G
+  buildpack: java_buildpack
+  routes:
+  - route: sb-basic-demo.cfapps.io
+  stack: cflinuxfs2
