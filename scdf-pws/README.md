@@ -1,3 +1,3 @@
-## Demo Instructions
+## Going Cloud Native Demo
 
-[demo](https://cnd-java-workshop-v1.pal.pivotal.io/unit/going-cloud-native/demo.html)
+[instructions](https://cnd-java-workshop-v1.pal.pivotal.io/unit/going-cloud-native/demo.html)
