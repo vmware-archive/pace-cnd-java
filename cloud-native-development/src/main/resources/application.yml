@@ -1,0 +1,17 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      ddl-auto: update
+
+greetingLanguage: English
+---
+spring:
+  profiles: dev
+greetingLanguage: French
+---
+spring:
+  profiles: prod
+greetingLanguage: Spanish
