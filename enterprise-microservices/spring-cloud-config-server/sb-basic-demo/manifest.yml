@@ -7,3 +7,6 @@ applications:
   buildpack: java_buildpack
   random-route: true
   stack: cflinuxfs2
+  services:
+  - config-server
+  
