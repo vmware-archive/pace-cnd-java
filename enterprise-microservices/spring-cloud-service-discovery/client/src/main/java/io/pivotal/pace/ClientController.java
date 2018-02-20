@@ -27,7 +27,7 @@ public class ClientController {
     @RequestMapping("/")
 	public String phrase() {
 		
-		URI uri = UriComponentsBuilder.fromUriString("//sb-basic-demo/language")
+		URI uri = UriComponentsBuilder.fromUriString("//service-discovery/language")
 	            .build()
 	            .toUri();
 		
