@@ -29,7 +29,7 @@ public class ClientController {
     @HystrixCommand(fallbackMethod = "fallbackPhrase")
 	public String phrase() {
 		
-		URI uri = UriComponentsBuilder.fromUriString("//sb-basic-demo/language")
+		URI uri = UriComponentsBuilder.fromUriString("//circuit-breaker/language")
 	            .build()
 	            .toUri();
 		

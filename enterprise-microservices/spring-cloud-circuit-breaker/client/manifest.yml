@@ -1,6 +1,6 @@
 applications:
-- name: client
-  path: target/client-0.0.1-SNAPSHOT.jar
+- name: circuit-breaker-client
+  path: target/circuit-breaker-client-0.0.1-SNAPSHOT.jar
   disk_quota: 1G
   instances: 1
   memory: 1G
