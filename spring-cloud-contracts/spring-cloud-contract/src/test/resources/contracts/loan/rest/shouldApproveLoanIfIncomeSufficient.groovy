@@ -14,7 +14,7 @@ then:
     """)
     request {
         method POST()
-        url "/v1/check"
+        url "/check/v1"
         body(
             income: 50000, loanAmount: 10000
             )
