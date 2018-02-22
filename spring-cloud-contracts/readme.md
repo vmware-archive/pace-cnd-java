@@ -5,3 +5,5 @@
 ```
 mvn clean install -DskipTests
 ```
+
+2. Run the LoanApprovalTests JUnit tests in the `spring-cloud-contract-client`.
