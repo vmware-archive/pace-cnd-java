@@ -18,6 +18,6 @@ Delete user:
 ``http --json DELETE http://<host-name>/users/sam``
 
 List of users:  
-```http http://<host-name>/users``
+``http http://<host-name>/users``
 
 
