@@ -19,4 +19,8 @@ lazy val root = (project in file(".")).
       "com.typesafe.akka" %% "akka-stream-testkit"  % akkaVersion     % Test,
       "org.scalatest"     %% "scalatest"            % "3.0.5"         % Test
     )
+  ).
+  settings(
+    mainClass in assembly := Some("com.lightbend.akka.http.sample.QuickstartServer")
   )
+
