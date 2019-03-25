@@ -2,7 +2,8 @@
 
 ```
 cd howdy-akka
-sbt assembly
+sbt compile
+sbt package
 cf push
 ```
 
