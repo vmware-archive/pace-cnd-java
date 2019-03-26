@@ -12,7 +12,7 @@ class BootLoadSimulation extends Simulation {
   val baseUrl = System.getProperty("TARGET_URL")
   val sim_users = System.getProperty("SIM_USERS").toInt
 
-  val httpConf = http.baseURL(baseUrl)
+  val httpConf = http.baseUrl(baseUrl)
 
   val headers = Map("Accept" -> """application/json""")
 
@@ -34,5 +34,5 @@ class BootLoadSimulation extends Simulation {
   val scn = scenario("Passthrough Page")
     .exec(passThroughPage)
 
-  setUp(scn.inject(rampUsers(sim_users).over(30 seconds)).protocols(httpConf))
+  setUp(scn.inject(rampUsers(sim_users) during (30 seconds)).protocols(httpConf))
 }
