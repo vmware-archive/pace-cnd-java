@@ -7,7 +7,7 @@ echo "==============================================================="
 # Required Variables for this script. CF* variables are prompted if not set
 # *****************************************************************************
 SCDF_APP_NAME=
-SCDF_RELEASE=1.3.0.RELEASE
+SCDF_RELEASE=1.7.4.RELEASE
 CF_DOMAIN=cfapps.io
 CF_USERNAME=
 CF_PASSWORD=

@@ -15,7 +15,7 @@ done
 # *****************************************************************************
 # Required Variables for this script. CF* variables are prompted if not set
 # *****************************************************************************
-SCDF_APP_NAME=corbs-scdf
+SCDF_APP_NAME=
 CF_DOMAIN=cfapps.io
 
 cf unbind-service $SCDF_APP_NAME scdf-redis

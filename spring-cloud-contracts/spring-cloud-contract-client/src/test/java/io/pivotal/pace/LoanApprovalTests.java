@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.cloud.contract.stubrunner.spring.AutoConfigureStubRunner;
+import org.springframework.cloud.contract.stubrunner.spring.StubRunnerProperties;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -18,7 +19,7 @@ import io.pivotal.pace.model.Profile;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment=WebEnvironment.NONE)
-@AutoConfigureStubRunner(ids = {"pace.pivotal.io:spring-cloud-contract:+:stubs:6565"}, workOffline = true)
+@AutoConfigureStubRunner(ids = {"pace.pivotal.io:spring-cloud-contract:+:stubs:6565"}, stubsMode = StubRunnerProperties.StubsMode.LOCAL)
 @DirtiesContext
 
 public class LoanApprovalTests {

@@ -1,11 +1,11 @@
-lazy val akkaHttpVersion = "10.0.11"
-lazy val akkaVersion    = "2.5.8"
+lazy val akkaHttpVersion = "10.1.7"
+lazy val akkaVersion    = "2.5.21"
 
 lazy val root = (project in file(".")).
   settings(
     inThisBuild(List(
       organization    := "io.pivotal.pa",
-      scalaVersion    := "2.12.4"
+      scalaVersion    := "2.12.8"
     )),
     name := "howdy-akka",
     libraryDependencies ++= Seq(
@@ -17,6 +17,10 @@ lazy val root = (project in file(".")).
       "com.typesafe.akka" %% "akka-http-testkit"    % akkaHttpVersion % Test,
       "com.typesafe.akka" %% "akka-testkit"         % akkaVersion     % Test,
       "com.typesafe.akka" %% "akka-stream-testkit"  % akkaVersion     % Test,
-      "org.scalatest"     %% "scalatest"            % "3.0.1"         % Test
+      "org.scalatest"     %% "scalatest"            % "3.0.5"         % Test
     )
+  ).
+  settings(
+    mainClass in assembly := Some("com.lightbend.akka.http.sample.QuickstartServer")
   )
+
